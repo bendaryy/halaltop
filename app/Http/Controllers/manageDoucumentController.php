@@ -131,7 +131,7 @@ class manageDoucumentController extends Controller
         for ($i = 0; $i < count($request->quantity); $i++) {
             $Data = [
                 "description" => $request->invoiceDescription[$i],
-                "itemType" => "EGS",
+                "itemType" => "GS1",
                 "itemCode" => $request->itemCode[$i],
                 // "itemCode" => "10003834",
                 "unitType" => "EA",
@@ -284,7 +284,7 @@ class manageDoucumentController extends Controller
         for ($i = 0; $i < count($request->quantity); $i++) {
             $Data = [
                 "description" => $request->invoiceDescription[$i],
-                "itemType" => "EGS",
+                "itemType" => "GS1",
                 "itemCode" => $request->itemCode[$i],
                 // "itemCode" => "10003834",
                 "unitType" => "EA",
@@ -418,7 +418,7 @@ class manageDoucumentController extends Controller
         $product = Http::withHeaders([
             "Authorization" => 'Bearer ' . $response['access_token'],
             "Content-Type" => "application/json",
-        ])->get('https://api.invoicing.eta.gov.eg/api/v1.0/codetypes/requests/my?Active=true&Status=Approved&PS=1000');
+        ])->get("https://api.invoicing.eta.gov.eg/api/v1.0/codetypes/GS1/codes?TaxpayerRIN=".auth()->user()->details->company_id."&OnlyActive=true&Ps=1000&Pn=1");
 
         $products = $product['result'];
         $codes = DB::table('products')->where('status', 'Approved')->get();
@@ -443,7 +443,7 @@ class manageDoucumentController extends Controller
         $product = Http::withHeaders([
             "Authorization" => 'Bearer ' . $response['access_token'],
             "Content-Type" => "application/json",
-        ])->get('https://api.invoicing.eta.gov.eg/api/v1.0/codetypes/requests/my?Active=true&Status=Approved&PS=1000');
+        ])->get("https://api.invoicing.eta.gov.eg/api/v1.0/codetypes/GS1/codes?TaxpayerRIN=".auth()->user()->details->company_id."&OnlyActive=true&Ps=1000&Pn=1");
 
         $products = $product['result'];
         $codes = DB::table('products')->where('status', 'Approved')->get();
@@ -466,7 +466,7 @@ class manageDoucumentController extends Controller
         $product = Http::withHeaders([
             "Authorization" => 'Bearer ' . $response['access_token'],
             "Content-Type" => "application/json",
-        ])->get('https://api.invoicing.eta.gov.eg/api/v1.0/codetypes/requests/my?Active=true&Status=Approved&PS=1000');
+        ])->get("https://api.invoicing.eta.gov.eg/api/v1.0/codetypes/GS1/codes?TaxpayerRIN=".auth()->user()->details->company_id."&OnlyActive=true&Ps=1000&Pn=1");
 
         $products = $product['result'];
         $codes = DB::table('products')->where('status', 'Approved')->get();
@@ -491,7 +491,7 @@ class manageDoucumentController extends Controller
         $product = Http::withHeaders([
             "Authorization" => 'Bearer ' . $response['access_token'],
             "Content-Type" => "application/json",
-        ])->get('https://api.invoicing.eta.gov.eg/api/v1.0/codetypes/requests/my?Active=true&Status=Approved&PS=1000');
+        ])->get("https://api.invoicing.eta.gov.eg/api/v1.0/codetypes/GS1/codes?TaxpayerRIN=".auth()->user()->details->company_id."&OnlyActive=true&Ps=1000&Pn=1");
 
         $products = $product['result'];
         $codes = DB::table('products')->where('status', 'Approved')->get();
@@ -514,7 +514,7 @@ class manageDoucumentController extends Controller
         $product = Http::withHeaders([
             "Authorization" => 'Bearer ' . $response['access_token'],
             "Content-Type" => "application/json",
-        ])->get('https://api.invoicing.eta.gov.eg/api/v1.0/codetypes/requests/my?Active=true&Status=Approved&PS=1000');
+        ])->get("https://api.invoicing.eta.gov.eg/api/v1.0/codetypes/GS1/codes?TaxpayerRIN=".auth()->user()->details->company_id."&OnlyActive=true&Ps=1000&Pn=1");
 
         $products = $product['result'];
         $codes = DB::table('products')->where('status', 'Approved')->get();
@@ -539,7 +539,7 @@ class manageDoucumentController extends Controller
         $product = Http::withHeaders([
             "Authorization" => 'Bearer ' . $response['access_token'],
             "Content-Type" => "application/json",
-        ])->get('https://api.invoicing.eta.gov.eg/api/v1.0/codetypes/requests/my?Active=true&Status=Approved&PS=1000');
+        ])->get("https://api.invoicing.eta.gov.eg/api/v1.0/codetypes/GS1/codes?TaxpayerRIN=".auth()->user()->details->company_id."&OnlyActive=true&Ps=1000&Pn=1");
 
         $products = $product['result'];
         $codes = DB::table('products')->where('status', 'Approved')->get();
