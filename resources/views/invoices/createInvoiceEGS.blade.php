@@ -78,7 +78,7 @@
     <div class="wrapper" style="background-color: white">
 
 
-        @if (request()->routeIs('createInvoice'))
+
             <form action="{{ route('createInvoice2') }}" method="GET">
                 <div class="card text-center" style="margin: auto;margin-bottom: 50px">
                     <div class="card-body">
@@ -110,17 +110,17 @@
                                             border-color: #1598ca; margin-bottom: 30px;">@lang('site.fillDetails')</button>
                     </div> --}}
             </form>
-        @else
-            <div style="text-align: center">
+
+            {{-- <div style="text-align: center">
                 <a href="{{ route('createInvoice') }}" class="btn btn-success" style="text-align: center;min-width: 250px!important;background-color: #1598ca;
                                     border-color: #1598ca; margin-bottom: 30px;">@lang('site.backtochoose')</a>
-            </div>
-        @endif
+            </div> --}}
+
 
 
 
         <div style="margin-bottom: 50px">
-            <form method="POST" action="{{ route('storeInvoice') }}">
+            <form method="POST" action="{{ route('storeInvoice2') }}">
                 @method("POST")
                 @csrf
 

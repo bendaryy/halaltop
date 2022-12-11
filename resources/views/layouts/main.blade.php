@@ -124,10 +124,10 @@
                                 <i class="bx bx-right-arrow-alt"></i>@lang('site.received_documents')</a>
                         </li>
                         <li> <a href="{{ route('createInvoice') }}">
-                                <i class="bx bx-right-arrow-alt"></i>اضافة وثيقة بالجنيه</a>
+                                <i class="bx bx-right-arrow-alt"></i>اضافة وثيقة GS1</a>
                         </li>
-                        <li> <a href="{{ route('createInvoiceDollar') }}">
-                                <i class="bx bx-right-arrow-alt"></i>اضافة وثيقة بالدولار</a>
+                        <li> <a href="{{ route('createInvoice2') }}">
+                                <i class="bx bx-right-arrow-alt"></i>اضافة وثيقة EGS</a>
                         </li>
                     </ul>
                 </li>

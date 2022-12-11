@@ -4,6 +4,7 @@ use App\Http\Controllers\ApisettingController as apisetting;
 use App\Http\Controllers\CategoryController as category;
 use App\Http\Controllers\CompanyController as company;
 use App\Http\Controllers\CustomerController as customer;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DocumentController as document;
 use App\Http\Controllers\ImportController as import;
 use App\Http\Controllers\IssureController as issure;
@@ -114,6 +115,7 @@ Route::group(
 
 // send invoice
             Route::post('storeInvoice', [manageDoucumentController::class, 'invoice'])->name('storeInvoice');
+            Route::post('storeInvoice2', [manageDoucumentController::class, 'invoice2'])->name('storeInvoice2');
             Route::post('storeInvoiceDollar', [manageDoucumentController::class, 'invoiceDollar'])->name('storeInvoiceDollar');
 
 //signature
@@ -158,6 +160,11 @@ Route::group(
         });
 
     });
+
+
+// get company api
+Route::get('getcompany/{id}', [CustomerController::class, 'getCompany'])->name('getCompany');
+
 
 // Remote Server
 Route::get('updatestatus', [remote::class, 'updatestatus'])->name('updatestatus');
