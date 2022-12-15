@@ -203,7 +203,7 @@ class manageDoucumentController extends Controller
         // End Bank payment
 
         $trnsformed = json_encode($invoice, JSON_UNESCAPED_UNICODE);
-        $myFileToJson = fopen("C:\laragon\www\halaltop\EInvoicing\SourceDocumentJson.json", "w") or die("unable to open file");
+        $myFileToJson = fopen("C:\laragon\www\madboly\EInvoicing\SourceDocumentJson.json", "w") or die("unable to open file");
         fwrite($myFileToJson, $trnsformed);
         return redirect()->route('cer');
 
@@ -267,14 +267,14 @@ class manageDoucumentController extends Controller
             "totalSalesAmount" => floatval($request->TotalSalesAmount),
             "netAmount" => floatval($request->TotalNetAmount),
             "taxTotals" => array(
-                array(
-                    "taxType" => "T4",
-                    "amount" => floatval($request->totalt4Amount),
-                ),
-                array(
-                    "taxType" => "T1",
-                    "amount" => floatval($request->totalt2Amount),
-                ),
+                // array(
+                //     "taxType" => "T4",
+                //     "amount" => floatval($request->totalt4Amount),
+                // ),
+                // array(
+                //     "taxType" => "T1",
+                //     "amount" => floatval($request->totalt2Amount),
+                // ),
             ),
             "totalAmount" => floatval($request->totalAmount2),
             "extraDiscountAmount" => floatval($request->ExtraDiscount),
@@ -308,22 +308,37 @@ class manageDoucumentController extends Controller
                     "amount" => floatval($request->discountAmount[$i]),
                 ],
                 "taxableItems" => [
-                    [
 
-                        "taxType" => "T4",
-                        "amount" => floatval($request->t4Amount[$i]),
-                        "subType" => ($request->t4subtype[$i]),
-                        "rate" => floatval($request->t4rate[$i]),
-                    ],
-                    [
-                        "taxType" => "T1",
-                        "amount" => floatval($request->t2Amount[$i]),
-                        "subType" => ($request->t1subtype[$i]),
-                        "rate" => floatval($request->rate[$i]),
-                    ],
                 ],
 
             ];
+
+              if (floatval($request->t4rate[$i]) > 0) {
+                $newArray = [
+
+                    "taxType" => "T4",
+                    "amount" => floatval($request->t4Amount[$i]),
+                    "subType" => ($request->t4subtype[$i]),
+                    "rate" => floatval($request->t4rate[$i]),
+                ];
+
+                array_push($Data['taxableItems'], $newArray);
+
+            }
+
+            if (floatval($request->rate[$i]) > 0) {
+                $newArray2 = [
+                    "taxType" => "T1",
+                    "amount" => floatval($request->t2Amount[$i]),
+                    "subType" => ($request->t1subtype[$i]),
+                    "rate" => floatval($request->rate[$i]),
+                ];
+                array_push($Data['taxableItems'], $newArray2);
+
+            }
+
+
+
             $invoice['invoiceLines'][$i] = $Data;
         }
 
@@ -345,6 +360,23 @@ class manageDoucumentController extends Controller
         ($request->referencesInvoice ? $invoice['references'] = [$request->referencesInvoice] : "");
         // End reference debit or credit note
 
+         if(floatval($request->totalt4Amount)>0){
+            $newArray = [
+                 "taxType" => "T4",
+                 "amount" => floatval($request->totalt4Amount),
+            ];
+             array_push($invoice['taxTotals'], $newArray);
+        }
+        if(floatval($request->totalt2Amount)>0){
+            $newArray = [
+                 "taxType" => "T1",
+                 "amount" => floatval($request->totalt2Amount),
+            ];
+             array_push($invoice['taxTotals'], $newArray);
+        }
+
+
+
         // this is for Bank payment
 
         ($request->bankName ? $invoice['payment']["bankName"] = $request->bankName : "");
@@ -356,7 +388,7 @@ class manageDoucumentController extends Controller
         // End Bank payment
 
         $trnsformed = json_encode($invoice, JSON_UNESCAPED_UNICODE);
-        $myFileToJson = fopen("C:\laragon\www\halaltop\EInvoicing\SourceDocumentJson.json", "w") or die("unable to open file");
+        $myFileToJson = fopen("C:\laragon\www\madboly\EInvoicing\SourceDocumentJson.json", "w") or die("unable to open file");
         fwrite($myFileToJson, $trnsformed);
         return redirect()->route('cer');
 
@@ -391,7 +423,7 @@ class manageDoucumentController extends Controller
         ]);
 
         $invoice =
-            [
+           [
             "issuer" => array(
                 "address" => array(
                     "branchID" => "0",
@@ -425,14 +457,14 @@ class manageDoucumentController extends Controller
             "totalSalesAmount" => floatval($request->TotalSalesAmount),
             "netAmount" => floatval($request->TotalNetAmount),
             "taxTotals" => array(
-                array(
-                    "taxType" => "T4",
-                    "amount" => floatval($request->totalt4Amount),
-                ),
-                array(
-                    "taxType" => "T1",
-                    "amount" => floatval($request->totalt2Amount),
-                ),
+                // array(
+                //     "taxType" => "T4",
+                //     "amount" => floatval($request->totalt4Amount),
+                // ),
+                // array(
+                //     "taxType" => "T1",
+                //     "amount" => floatval($request->totalt2Amount),
+                // ),
             ),
             "totalAmount" => floatval($request->totalAmount2),
             "extraDiscountAmount" => floatval($request->ExtraDiscount),
@@ -466,22 +498,37 @@ class manageDoucumentController extends Controller
                     "amount" => floatval($request->discountAmount[$i]),
                 ],
                 "taxableItems" => [
-                    [
 
-                        "taxType" => "T4",
-                        "amount" => floatval($request->t4Amount[$i]),
-                        "subType" => ($request->t4subtype[$i]),
-                        "rate" => floatval($request->t4rate[$i]),
-                    ],
-                    [
-                        "taxType" => "T1",
-                        "amount" => floatval($request->t2Amount[$i]),
-                        "subType" => ($request->t1subtype[$i]),
-                        "rate" => floatval($request->rate[$i]),
-                    ],
                 ],
 
             ];
+
+              if (floatval($request->t4rate[$i]) > 0) {
+                $newArray = [
+
+                    "taxType" => "T4",
+                    "amount" => floatval($request->t4Amount[$i]),
+                    "subType" => ($request->t4subtype[$i]),
+                    "rate" => floatval($request->t4rate[$i]),
+                ];
+
+                array_push($Data['taxableItems'], $newArray);
+
+            }
+
+            if (floatval($request->rate[$i]) > 0) {
+                $newArray2 = [
+                    "taxType" => "T1",
+                    "amount" => floatval($request->t2Amount[$i]),
+                    "subType" => ($request->t1subtype[$i]),
+                    "rate" => floatval($request->rate[$i]),
+                ];
+                array_push($Data['taxableItems'], $newArray2);
+
+            }
+
+
+
             $invoice['invoiceLines'][$i] = $Data;
         }
 
@@ -503,6 +550,23 @@ class manageDoucumentController extends Controller
         ($request->referencesInvoice ? $invoice['references'] = [$request->referencesInvoice] : "");
         // End reference debit or credit note
 
+         if(floatval($request->totalt4Amount)>0){
+            $newArray = [
+                 "taxType" => "T4",
+                 "amount" => floatval($request->totalt4Amount),
+            ];
+             array_push($invoice['taxTotals'], $newArray);
+        }
+        if(floatval($request->totalt2Amount)>0){
+            $newArray = [
+                 "taxType" => "T1",
+                 "amount" => floatval($request->totalt2Amount),
+            ];
+             array_push($invoice['taxTotals'], $newArray);
+        }
+
+
+
         // this is for Bank payment
 
         ($request->bankName ? $invoice['payment']["bankName"] = $request->bankName : "");
@@ -514,7 +578,7 @@ class manageDoucumentController extends Controller
         // End Bank payment
 
         $trnsformed = json_encode($invoice, JSON_UNESCAPED_UNICODE);
-        $myFileToJson = fopen("C:\laragon\www\halaltop\EInvoicing\SourceDocumentJson.json", "w") or die("unable to open file");
+        $myFileToJson = fopen("C:\laragon\www\madboly\EInvoicing\SourceDocumentJson.json", "w") or die("unable to open file");
         fwrite($myFileToJson, $trnsformed);
         return redirect()->route('cer');
 
@@ -525,11 +589,11 @@ class manageDoucumentController extends Controller
     public function openBat()
     {
 
-        shell_exec('C:\laragon\www\halaltop\EInvoicing/SubmitInvoices2.bat');
-        $path = "C:\laragon\www\halaltop\EInvoicing/FullSignedDocument.json";
-        $path2 = "C:\laragon\www\halaltop\EInvoicing/Cades.txt";
-        $path3 = "C:\laragon\www\halaltop\EInvoicing/CanonicalString.txt";
-        $path4 = "C:\laragon\www\halaltop\EInvoicing/SourceDocumentJson.json";
+        shell_exec('C:\laragon\www\madboly\EInvoicing/SubmitInvoices2.bat');
+        $path = "C:\laragon\www\madboly\EInvoicing/FullSignedDocument.json";
+        $path2 = "C:\laragon\www\madboly\EInvoicing/Cades.txt";
+        $path3 = "C:\laragon\www\madboly\EInvoicing/CanonicalString.txt";
+        $path4 = "C:\laragon\www\madboly\EInvoicing/SourceDocumentJson.json";
 
         $fullSignedFile = file_get_contents($path);
 
